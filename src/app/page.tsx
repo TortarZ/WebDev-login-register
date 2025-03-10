@@ -1,8 +1,10 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { FaRegSmile } from "react-icons/fa";
 import { FaCheck, FaRegSquareCheck } from "react-icons/fa6";
 import { IoDiamondOutline } from "react-icons/io5";
+import { useInView } from "react-intersection-observer";
 
 const blogs = [
   {
@@ -26,11 +28,30 @@ const blogs = [
 ];
 
 export default function Home() {
+  const { ref: hero, inView: heroIsVisible } = useInView();
+  const { ref: iconCircle, inView: iconCircleIsVisible } = useInView({
+    triggerOnce: true,
+  });
+  const { ref: service, inView: serviceIsVisible } = useInView({
+    triggerOnce: true,
+  });
+  const { ref: services, inView: servicesIsVisible } = useInView({
+    triggerOnce: true,
+  });
+  const { ref: aboutus, inView: aboutusIsVisible } = useInView({
+    triggerOnce: true,
+  });
+  const { ref: articles, inView: articlesIsVisible } = useInView({
+    triggerOnce: true,
+  });
   return (
     <>
       <main>
         <section className="bg-[url(/bg-hero.jpg)] bg-no-repeat w-full h-80 md:h-147 lg:h-180 bg-cover bg-center">
-          <div className="bg-zinc-900/45 w-full h-full py-4 md:py-0 md:pt-20 lg:px-20 xl:px-100">
+          <div
+            ref={hero}
+            className="bg-zinc-900/45 w-full h-full py-4 md:py-0 md:pt-20 lg:px-20 xl:px-100 animate-hero"
+          >
             <div className="bg-zinc-800/50 md:h-full lg:h-fit md:py-4 md:px-8 md:flex md:flex-col md:gap-8">
               <div className="flex flex-col items-center gap-4 py-4">
                 <h2 className="text-2xl font-bold text-white font-sans">
@@ -82,7 +103,9 @@ export default function Home() {
             </svg>
           </div>
           <div className="flex flex-col h-full items-center py-30 gap-16 lg:flex-row lg:justify-center lg:py-40">
-            <div className="flex flex-col items-center text-center gap-4">
+            <div
+              className={`flex flex-col items-center text-center gap-4 opacity-0 animate-icon-circle`}
+            >
               <Image src={"/icon1.webp"} alt="icon1" width={110} height={110} />
               <h3 className="uppercase text-4xl text-amber-400 font-bold font-sans">
                 10 + years
@@ -91,28 +114,42 @@ export default function Home() {
                 เราคือผู้เชี่ยวชาญที่มีประสบการณ์
               </p>
             </div>
-            <div className="flex flex-col items-center text-center gap-4">
+            <div
+              className={`flex flex-col items-center text-center gap-4 opacity-0 animate-icon-circle`}
+            >
               <Image src={"/icon2.webp"} alt="icon1" width={110} height={110} />
               <h3 className="uppercase text-4xl text-amber-400 font-bold font-sans">
                 150 +
               </h3>
               <p className="text-2xl text-zinc-800">บริษัทที่เราเป็นผู้ดูแล</p>
             </div>
-            <div className="flex flex-col items-center text-center gap-4">
+            <div
+              className={`flex flex-col items-center text-center gap-4 opacity-0 animate-icon-circle`}
+            >
               <Image src={"/icon3.png"} alt="icon1" width={110} height={110} />
               <h3 className="uppercase text-4xl text-amber-400 font-bold font-sans">
                 150 +
               </h3>
-              <p className="text-2xl text-zinc-800">บริษัทที่เราช่วยจัดตั้ง</p>
+              <p ref={service} className="text-2xl text-zinc-800">
+                บริษัทที่เราช่วยจัดตั้ง
+              </p>
             </div>
           </div>
         </div>
         <div className="bg-white text-center py-4 px-6 md:px-4 flex flex-col gap-10">
-          <h2 className="text-4xl text-zinc-800 relative after:block after:w-12 after:h-0.5 after:bg-amber-400 after:mt-2 after:mx-auto md:text-5xl md:pb-8 after:md:w-50 after:md:mt-4">
+          <h2
+            className={`text-4xl text-zinc-800 relative after:block after:w-12 after:h-0.5 after:bg-amber-400 after:mt-2 after:mx-auto md:text-5xl md:pb-8 after:md:w-50 after:md:mt-4 opacity-0 ${
+              serviceIsVisible ? "animate-service-header" : ""
+            }`}
+          >
             ทำไมต้องใช้บริการกับทางเรา
           </h2>
           <div className="md:flex md:gap-4 w-full h-full xl:px-50">
-            <div className="md:w-1/2">
+            <div
+              className={`md:w-1/2 opacity-0 ${
+                serviceIsVisible ? "service-article" : ""
+              }`}
+            >
               <div className="grid gap-10">
                 <div className="relative">
                   <FaRegSquareCheck className="absolute text-amber-500 text-5xl outline-2 outline-amber-500 rounded-full p-2" />
@@ -157,7 +194,11 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="md:w-1/2">
+            <div
+              className={`md:w-1/2 opacity-0 ${
+                serviceIsVisible ? "service-img" : ""
+              }`}
+            >
               <div className="py-10 md:py-0">
                 <div className="shadow-2xl rounded-2xl">
                   <div className="">
@@ -183,7 +224,10 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="bg-[#292B37] flex flex-col items-center text-center py-18 gap-8">
+        <div
+          ref={services}
+          className="bg-[#292B37] flex flex-col items-center text-center py-18 gap-8"
+        >
           <h2 className="text-4xl text-white relative after:block after:w-20 after:h-0.5 after:bg-amber-400 after:mt-8 after:lg:w-35 after:mx-auto">
             บริการของเรา
           </h2>
@@ -196,7 +240,11 @@ export default function Home() {
             <span>ให้บริการ</span>
           </div>
           <div className="lg:flex lg:justify-center w-full">
-            <div className="flex flex-col items-center gap-2 py-8 lg:w-1/3">
+            <div
+              className={`flex flex-col items-center gap-2 py-8 lg:w-1/3 opacity-0 ${
+                servicesIsVisible ? "services-r" : ""
+              }`}
+            >
               <Image
                 src={"/accounting-1.png"}
                 alt="accounting"
@@ -218,7 +266,11 @@ export default function Home() {
                 ดูรายละเอียด
               </button>
             </div>
-            <div className="flex flex-col items-center gap-2 py-8 lg:w-1/3">
+            <div
+              className={`flex flex-col items-center gap-2 py-8 lg:w-1/3 opacity-0 ${
+                servicesIsVisible ? "services-l" : ""
+              }`}
+            >
               <Image
                 src={"/calculations.png"}
                 alt="accounting"
@@ -235,7 +287,11 @@ export default function Home() {
                 ดูรายละเอียด
               </button>
             </div>
-            <div className="flex flex-col items-center gap-2 py-8 lg:w-1/3">
+            <div
+              className={`flex flex-col items-center gap-2 py-8 lg:w-1/3 opacity-0 ${
+                servicesIsVisible ? "services-r" : ""
+              }`}
+            >
               <Image
                 src={"/taxes.png"}
                 alt="accounting"
@@ -254,7 +310,11 @@ export default function Home() {
             </div>
           </div>
           <div className="w-full hidden md:flex justify-center">
-            <div className="w-[90%] lg:w-[80%] xl:w-[60%] h-95 xl:h-[35rem] bg-gradient-to-r from-amber-300 to-orange-400/90 rounded-2xl flex p-4 px-[3rem] lg:px-[5rem] xl:px-[2rem]">
+            <div
+              className={`w-[90%] lg:w-[80%] xl:w-[60%] h-95 xl:h-[35rem] bg-gradient-to-r from-amber-300 to-orange-400/90 rounded-2xl flex p-4 px-[3rem] lg:px-[5rem] xl:px-[2rem] opacity-0 ${
+                servicesIsVisible ? "services-banner" : ""
+              }`}
+            >
               <div className="w-1/2 flex justify-center">
                 <div className="text-white text-left flex flex-col justify-center gap-8">
                   <h2 className="text-4xl xl:text-7xl">
@@ -282,7 +342,10 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="text-center py-10 md:py-20 px-4 xl:px-50 flex flex-col gap-8 bg-[url(/business-bg.webp)] bg-center bg-cover bg-no-repeat">
+        <div
+          ref={aboutus}
+          className="text-center py-10 md:py-20 px-4 xl:px-50 flex flex-col gap-8 bg-[url(/business-bg.webp)] bg-center bg-cover bg-no-repeat"
+        >
           <h2 className="text-4xl text-zinc-800 relative after:block after:w-20 after:h-0.5 after:bg-zinc-600 after:mt-8 after:mx-auto">
             เกี่ยวกับเรา
           </h2>
@@ -296,7 +359,11 @@ export default function Home() {
             โครงสร้างทางการเงิน ฯลฯ
           </p>
           <div className="flex flex-col gap-4 lg:flex-row">
-            <div className="flex flex-col items-center gap-2 bg-white shadow-md px-8  py-10 rounded-md">
+            <div
+              className={`flex flex-col items-center gap-2 bg-white shadow-md px-8  py-10 rounded-md opacity-0 ${
+                aboutusIsVisible ? "aboutus-r" : ""
+              }`}
+            >
               <FaCheck className="fill-amber-600 text-4xl" />
               <h2 className="text-2xl text-amber-500">รับรองคุณภาพ</h2>
               <p className="text-xl text-zinc-600">
@@ -304,7 +371,11 @@ export default function Home() {
                 จากจำนวนลูกค้าที่เติบโตอย่างต่อเนื่องของเราสามารถเป็นเครื่องยืนยันสิ่งนี้ได้
               </p>
             </div>
-            <div className="flex flex-col items-center gap-2 bg-white shadow-md px-8  py-10 rounded-md">
+            <div
+              className={`flex flex-col items-center gap-2 bg-white shadow-md px-8  py-10 rounded-md opacity-0 ${
+                aboutusIsVisible ? "aboutus-l" : ""
+              }`}
+            >
               <FaRegSmile className="fill-amber-600 text-4xl" />
               <h2 className="text-2xl text-amber-500">เราเข้าใจลูกค้าของเรา</h2>
               <p className="text-xl text-zinc-600">
@@ -313,7 +384,11 @@ export default function Home() {
                 เราเชื่อว่าสิ่งนี้จะทำให้เราและลูกค้าของเราเติบโตไปด้วยกันอย่างยั่งยืน
               </p>
             </div>
-            <div className="flex flex-col items-center gap-2 bg-white shadow-md px-8  py-10 rounded-md">
+            <div
+              className={`flex flex-col items-center gap-2 bg-white shadow-md px-8  py-10 rounded-md opacity-0 ${
+                aboutusIsVisible ? "aboutus-r" : ""
+              }`}
+            >
               <IoDiamondOutline className="text-amber-600 text-4xl" />
               <h2 className="text-2xl text-amber-500">ประสบการณ์ที่หลากหลาย</h2>
               <p className="text-xl text-zinc-600">
@@ -343,13 +418,18 @@ export default function Home() {
         </div>
         <article className="bg-[url(/business-bg.webp)] scale-y-[-1] bg-center bg-no-repeat bg-cover text-center py-16 xl:px-50">
           <div className="scale-y-[-1] flex flex-col items-center gap-16">
-            <h2 className="text-4xl text-zinc-800 relative after:block after:w-20 after:h-0.5 after:bg-zinc-600 after:mt-8 after:mx-auto">
+            <h2
+              ref={articles}
+              className="text-4xl text-zinc-800 relative after:block after:w-20 after:h-0.5 after:bg-zinc-600 after:mt-8 after:mx-auto"
+            >
               บทความและสาระดีๆ
             </h2>
             <section className="flex flex-col gap-6 md:flex-row md:px-4 ">
               {blogs.map((blog, index) => (
                 <div
-                  className="flex flex-col items-center px-5 md:px-0 w-full"
+                  className={`flex flex-col items-center px-5 md:px-0 w-full opacity-0 ${
+                    articlesIsVisible ? "animate-article" : ""
+                  }`}
                   key={index}
                 >
                   <Image

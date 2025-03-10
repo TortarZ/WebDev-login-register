@@ -7,3 +7,91 @@ body {
 button {
   cursor: pointer;
 }
+
+.animate-hero {
+  animation: fade-in 2s;
+}
+
+@keyframes fade-in {
+  0% {
+    transform: translateY(2rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-icon-circle {
+  animation: fade-in 2s 0.8s forwards;
+}
+
+.animate-service-header {
+  animation: fade-in-t-b 2s forwards;
+}
+
+.service-article {
+  animation: fade-in-l-r 2s forwards;
+}
+
+.service-img {
+  animation: fade-in-r-l 2s forwards;
+}
+
+@keyframes fade-in-t-b {
+  0% {
+    transform: translateY(-2rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in-l-r {
+  from {
+    opacity: 0;
+    transform: translateX(-2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0rem);
+  }
+}
+
+@keyframes fade-in-r-l {
+  from {
+    opacity: 0;
+    transform: translateX(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0rem);
+  }
+}
+
+.services-r {
+  animation: fade-in-l-r 2s 0.5s forwards;
+}
+
+.services-l {
+  animation: fade-in-r-l 2s 0.5s forwards;
+}
+
+.services-banner {
+  animation: fade-in 2s 2s forwards;
+}
+
+.aboutus-r {
+  animation: fade-in-l-r 2s 0.5s forwards;
+}
+
+.aboutus-l {
+  animation: fade-in-r-l 2s 0.5s forwards;
+}
+
+.animate-article {
+  animation: fade-in 2s 0.5s forwards;
+}
