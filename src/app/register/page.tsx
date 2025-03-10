@@ -50,7 +50,7 @@ const Register = () => {
     }
 
     try {
-      const resCheckUser = await fetch("http://localhost:3000/api/checkUser", {
+      const resCheckUser = await fetch("/api/checkUser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -64,7 +64,7 @@ const Register = () => {
         setError("อีเมล์ถูกใช้งานแล้ว");
         return;
       }
-      const res = await fetch("http://localhost:3000/api/register", {
+      const res = await fetch("/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
