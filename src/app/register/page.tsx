@@ -88,7 +88,7 @@ const Register = () => {
   };
   return (
     <>
-      <section className="h-svh w-full p-4 md:px-25 md:py-20 lg:px-50 xl:px-150">
+      <section className="h-svh w-full p-4 md:px-25 md:py-20 lg:px-50 xl:px-[30%]">
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <h2 className="text-4xl font-bold text-zinc-700">สมัครสมาชิก</h2>
 
