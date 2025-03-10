@@ -28,10 +28,6 @@ const blogs = [
 ];
 
 export default function Home() {
-  const { ref: hero, inView: heroIsVisible } = useInView();
-  const { ref: iconCircle, inView: iconCircleIsVisible } = useInView({
-    triggerOnce: true,
-  });
   const { ref: service, inView: serviceIsVisible } = useInView({
     triggerOnce: true,
   });
@@ -48,10 +44,7 @@ export default function Home() {
     <>
       <main>
         <section className="bg-[url(/bg-hero.jpg)] bg-no-repeat w-full h-80 md:h-147 lg:h-180 bg-cover bg-center">
-          <div
-            ref={hero}
-            className="bg-zinc-900/45 w-full h-full py-4 md:py-0 md:pt-20 lg:px-20 xl:px-100 animate-hero"
-          >
+          <div className="bg-zinc-900/45 w-full h-full py-4 md:py-0 md:pt-20 lg:px-20 xl:px-100 animate-hero">
             <div className="bg-zinc-800/50 md:h-full lg:h-fit md:py-4 md:px-8 md:flex md:flex-col md:gap-8">
               <div className="flex flex-col items-center gap-4 py-4">
                 <h2 className="text-2xl font-bold text-white font-sans">
