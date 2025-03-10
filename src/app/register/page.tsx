@@ -5,7 +5,7 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-const register = () => {
+const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -165,4 +165,4 @@ const register = () => {
     </>
   );
 };
-export default register;
+export default Register;
